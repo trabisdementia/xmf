@@ -1,0 +1,14 @@
+# To enable url rewrite copy this content of this file
+# to the .htaccess file on the root folder
+# if your installation is inside a sub folder like 'xoops'
+# change the last line to RewriteRule . /xoops/modules/xmf/router.php [L]
+#
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /modules/xmf/router.php [L]
+</IfModule>
