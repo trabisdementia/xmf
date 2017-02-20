@@ -216,7 +216,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
  */
 function ReadMap($enc) {
 	//Read a map file
-	$file = dirname(__FILE__).'/enc/'.strtolower($enc).'.map';
+	$file = __DIR__ . '/enc/' . strtolower($enc) . '.map';
 	$a = file($file);
 	if (empty($a)) {
 		die('Error: encoding not found: '.$enc);

@@ -52,7 +52,7 @@ class Xmf_Loader
         }
 
         $file = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-        if (!self::loadFile(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . $file)) {
+        if (!self::loadFile(dirname(__DIR__) . DIRECTORY_SEPARATOR . $file)) {
             return false;
         }
 

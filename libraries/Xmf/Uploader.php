@@ -2141,11 +2141,11 @@ class Xmf_Uploader
 
         // determines the language
         $this->lang = $lang;
-        if ($this->lang != 'en_GB' && file_exists(dirname(dirname(__FILE__)) . '/class.upload_0.32/lang') &&
-            file_exists(dirname(dirname(__FILE__))  . '/class.upload_0.32/lang/class.upload.' . $lang . '.php')
+        if ($this->lang != 'en_GB' && file_exists(dirname(__DIR__) . '/class.upload_0.32/lang') &&
+            file_exists(dirname(__DIR__) . '/class.upload_0.32/lang/class.upload.' . $lang . '.php')
         ) {
             $translation = null;
-            include(dirname(dirname(__FILE__)) . '/class.upload_0.32/lang/class.upload.' . $lang . '.php');
+            include(dirname(__DIR__) . '/class.upload_0.32/lang/class.upload.' . $lang . '.php');
             if (is_array($translation)) {
                 $this->translation = array_merge($this->translation, $translation);
             } else {

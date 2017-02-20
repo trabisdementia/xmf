@@ -22,7 +22,7 @@
 if (defined('XMF_EXEC')) return;
 
 if (!defined('XOOPS_ROOT_PATH')) {
-    require dirname(dirname(dirname(dirname(__FILE__)))) . '/mainfile.php';
+    require dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 }
 
 define('XMF_EXEC', true);
@@ -48,7 +48,7 @@ define('XMF_NEWLINE', "\n");
 define('_GLOBAL_LEFT', 'left');
 define('_GLOBAL_RIGHT', 'right');
 
-require dirname(dirname(__FILE__)) . '/libraries/Xmf/Loader.php';
+require dirname(__DIR__) . '/libraries/Xmf/Loader.php';
 spl_autoload_register(array('Xmf_Loader', 'loadClass'));
 
-require dirname(__FILE__) . '/functions.php';
+require __DIR__ . '/functions.php';

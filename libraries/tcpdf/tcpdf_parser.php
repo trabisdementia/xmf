@@ -43,7 +43,7 @@
  */
 
 // include class for decoding filters
-require_once(dirname(__FILE__).'/tcpdf_filters.php');
+require_once(__DIR__ . '/tcpdf_filters.php');
 
 /**
  * @class TCPDF_PARSER
