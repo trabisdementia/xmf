@@ -666,15 +666,15 @@ class PDF417 {
 			$row = $pstart;
 			switch ($cid) {
 				case 0: {
-					$L = ((30 * intval($r / 3)) + intval(($rows - 1) / 3));
+					$L = ((30 * (int)($r / 3)) + (int)(($rows - 1) / 3));
 					break;
 				}
 				case 1: {
-					$L = ((30 * intval($r / 3)) + ($ecl * 3) + (($rows - 1) % 3));
+					$L = ((30 * (int)($r / 3)) + ($ecl * 3) + (($rows - 1) % 3));
 					break;
 				}
 				case 2: {
-					$L = ((30 * intval($r / 3)) + ($cols - 1));
+					$L = ((30 * (int)($r / 3)) + ($cols - 1));
 					break;
 				}
 			}
@@ -687,15 +687,15 @@ class PDF417 {
 			}
 			switch ($cid) {
 				case 0: {
-					$L = ((30 * intval($r / 3)) + ($cols - 1));
+					$L = ((30 * (int)($r / 3)) + ($cols - 1));
 					break;
 				}
 				case 1: {
-					$L = ((30 * intval($r / 3)) + intval(($rows - 1) / 3));
+					$L = ((30 * (int)($r / 3)) + (int)(($rows - 1) / 3));
 					break;
 				}
 				case 2: {
-					$L = ((30 * intval($r / 3)) + ($ecl * 3) + (($rows - 1) % 3));
+					$L = ((30 * (int)($r / 3)) + ($ecl * 3) + (($rows - 1) % 3));
 					break;
 				}
 			}

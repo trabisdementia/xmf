@@ -106,7 +106,7 @@ class Xmf_Object_Controller
                         $value = strtotime($_POST[$key]);
                         //if strtotime returns false, the value is already a time stamp
                         if (!$value) {
-                            $value = intval($_POST[$key]);
+                            $value = (int)$_POST[$key];
                         }
                     }
                     $smartObj->setVar($key, $value);
@@ -209,7 +209,7 @@ class Xmf_Object_Controller
      */
     function &storeFromDefaultForm($created_success_msg, $modified_success_msg, $redirect_page = false, $debug = false, $x_param = false)
     {
-        $objectid = (isset($_POST[$this->_keyName])) ? intval($_POST[$this->_keyName]) : 0;
+        $objectid = (isset($_POST[$this->_keyName])) ? (int)$_POST[$this->_keyName] : 0;
         if ($debug) {
             if ($x_param) {
                 $smartObj = $this->handler->getD($objectid, true, $x_param);
@@ -276,7 +276,7 @@ class Xmf_Object_Controller
     {
         global $smart_previous_page;
 
-        $objectid = (isset($_REQUEST[$this->_keyName])) ? intval($_REQUEST[$this->_keyName]) : 0;
+        $objectid = (isset($_REQUEST[$this->_keyName])) ? (int)$_REQUEST[$this->_keyName] : 0;
         $smartObj = $this->handler->get($objectid);
 
         if ($smartObj->isNew()) {
@@ -317,7 +317,7 @@ class Xmf_Object_Controller
     {
         global $smart_previous_page, $xoopsTpl;
 
-        $objectid = (isset($_REQUEST[$this->_keyName])) ? intval($_REQUEST[$this->_keyName]) : 0;
+        $objectid = (isset($_REQUEST[$this->_keyName])) ? (int)$_REQUEST[$this->_keyName] : 0;
         $smartObj = $this->handler->get($objectid);
 
         if ($smartObj->isNew()) {

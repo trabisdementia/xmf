@@ -3706,8 +3706,8 @@ class Xmf_Uploader
                                     $this->image_ratio_crop = strtolower($this->image_ratio_crop);
                                     if (($this->image_src_x / $this->image_x) > ($this->image_src_y / $this->image_y)) {
                                         $this->image_dst_y = $this->image_y;
-                                        $this->image_dst_x = intval($this->image_src_x *
-                                                                    ($this->image_y / $this->image_src_y));
+                                        $this->image_dst_x = (int)($this->image_src_x *
+                                                                   ($this->image_y / $this->image_src_y));
                                         $ratio_crop = array();
                                         $ratio_crop['x'] = $this->image_dst_x - $this->image_x;
                                         if (strpos($this->image_ratio_crop, 'l') !== false) {
@@ -3730,8 +3730,8 @@ class Xmf_Uploader
                                         }
                                     } else {
                                         $this->image_dst_x = $this->image_x;
-                                        $this->image_dst_y = intval($this->image_src_y *
-                                                                    ($this->image_x / $this->image_src_x));
+                                        $this->image_dst_y = (int)($this->image_src_y *
+                                                                   ($this->image_x / $this->image_src_x));
                                         $ratio_crop = array();
                                         $ratio_crop['y'] = $this->image_dst_y - $this->image_y;
                                         if (strpos($this->image_ratio_crop, 't') !== false) {
@@ -3763,8 +3763,8 @@ class Xmf_Uploader
                                             ($this->image_src_y / $this->image_y)
                                         ) {
                                             $this->image_dst_y = $this->image_y;
-                                            $this->image_dst_x = intval($this->image_src_x *
-                                                                        ($this->image_y / $this->image_src_y));
+                                            $this->image_dst_x = (int)($this->image_src_x *
+                                                                       ($this->image_y / $this->image_src_y));
                                             $ratio_crop = array();
                                             $ratio_crop['x'] = $this->image_dst_x - $this->image_x;
                                             if (strpos($this->image_ratio_fill, 'l') !== false) {
@@ -3787,8 +3787,8 @@ class Xmf_Uploader
                                             }
                                         } else {
                                             $this->image_dst_x = $this->image_x;
-                                            $this->image_dst_y = intval($this->image_src_y *
-                                                                        ($this->image_x / $this->image_src_x));
+                                            $this->image_dst_y = (int)($this->image_src_y *
+                                                                       ($this->image_x / $this->image_src_x));
                                             $ratio_crop = array();
                                             $ratio_crop['y'] = $this->image_dst_y - $this->image_y;
                                             if (strpos($this->image_ratio_fill, 't') !== false) {
@@ -3815,12 +3815,12 @@ class Xmf_Uploader
                                             ($this->image_src_y / $this->image_y)
                                         ) {
                                             $this->image_dst_x = $this->image_x;
-                                            $this->image_dst_y = intval($this->image_src_y *
-                                                                        ($this->image_x / $this->image_src_x));
+                                            $this->image_dst_y = (int)($this->image_src_y *
+                                                                       ($this->image_x / $this->image_src_x));
                                         } else {
                                             $this->image_dst_y = $this->image_y;
-                                            $this->image_dst_x = intval($this->image_src_x *
-                                                                        ($this->image_y / $this->image_src_y));
+                                            $this->image_dst_x = (int)($this->image_src_x *
+                                                                       ($this->image_y / $this->image_src_y));
                                         }
                                     }
                                 }
@@ -4429,12 +4429,12 @@ class Xmf_Uploader
                                 $canvas_height = $this->image_dst_y - abs($this->image_watermark_y);
                                 if (($watermark_src_width / $canvas_width) > ($watermark_src_height / $canvas_height)) {
                                     $watermark_dst_width = $canvas_width;
-                                    $watermark_dst_height = intval($watermark_src_height *
-                                                                   ($canvas_width / $watermark_src_width));
+                                    $watermark_dst_height = (int)($watermark_src_height *
+                                                                  ($canvas_width / $watermark_src_width));
                                 } else {
                                     $watermark_dst_height = $canvas_height;
-                                    $watermark_dst_width = intval($watermark_src_width *
-                                                                  ($canvas_height / $watermark_src_height));
+                                    $watermark_dst_width = (int)($watermark_src_width *
+                                                                 ($canvas_height / $watermark_src_height));
                                 }
                                 $this->log .=
                                         '&nbsp;&nbsp;&nbsp;&nbsp;watermark resized from ' . $watermark_src_width . 'x' .
