@@ -137,7 +137,7 @@ class Xmf_Object_Form extends XoopsThemeForm
      * @param bool|string      $var
      * @param string           $required is this a "required" element?
      */
-    public function addElement(XoopsFormElement &$formElement, $key = false, $var = false, $required = 'notset')
+    public function addElement(XoopsFormElement $formElement, $key = false, $var = false, $required = 'notset')
     {
         if ($key) {
             $control = $this->decorator->getControl($key);
@@ -755,10 +755,10 @@ class Xmf_Object_Form extends XoopsThemeForm
     /**
      * assign to smarty form template instead of displaying directly
      *
-     * @param object &$tpl reference to a {@link Smarty} object
+     * @param object $tpl reference to a {@link Smarty} object
      * @param bool   $smartyName
      */
-    public function assign(&$tpl, $smartyName = false)
+    public function assign($tpl, $smartyName = false)
     {
         $i = 0;
         $elements = array();
