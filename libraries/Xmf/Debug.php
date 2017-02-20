@@ -50,4 +50,27 @@ class Xmf_Debug
         }
         return false;
     }
+
+    /**
+     * Output a dump of a file
+     *
+     * @param mixed $file file which will be dumped
+     * @param bool  $echo
+     * @param bool  $exit
+     *
+     * @return string
+     */
+    public static function dumpFile($file, $echo = true, $exit = false)
+    {
+        $msg = highlight_file($file, true);
+        $msg = "<div style='padding: 5px; font-weight: bold'>{$msg}</div>";
+        if (!$echo) {
+            return $msg;
+        }
+        echo $msg;
+        if ($exit) {
+            die();
+        }
+        return $msg;
+    }
 }

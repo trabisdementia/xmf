@@ -17,90 +17,6 @@
  */
 class Xmf_Utils
 {
-    /**
-     * Output a dump of a variable
-     *
-     * @param mixed $var variable which will be dumped
-     * @param bool  $echo
-     * @param bool  $exit
-     *
-     * @return string
-     */
-    public static function dumpVar($var, $echo = true, $exit = false)
-    {
-        $myts = Xmf::getInstance()->myts();
-        $msg = $myts->displayTarea(var_export($var, true));
-        $msg = "<div style='padding: 5px; font-weight: bold'>{$msg}</div>";
-        if (!$echo) {
-            return $msg;
-        }
-        echo $msg;
-        if ($exit) {
-            die();
-        }
-        return $msg;
-    }
-    public static function dumpVar2($var, $echo = true, $exit = false)
-    {
-        $myts = Xmf::getInstance()->myts();
-        ob_start();
-        var_dump($var);
-        $msg = ob_get_contents();
-        ob_end_clean();
-        //$msg = $myts->displayTarea($dump);
-        $msg = "<div style='padding: 5px; font-weight: bold'>{$msg}</div>";
-        if (!$echo) {
-            return $msg;
-        }
-        echo $msg;
-        if ($exit) {
-            die();
-        }
-        return $msg;
-    }
-
-    public static function dumpVar3($var, $echo = true, $exit = false)
-    {
-        $myts = Xmf::getInstance()->myts();
-        ob_start();
-        print_R($var);
-        $msg = ob_get_contents();
-        ob_end_clean();
-        //$msg = $myts->displayTarea($dump);
-        $msg = "<div style='padding: 5px; font-weight: bold'>{$msg}</div>";
-        if (!$echo) {
-            return $msg;
-        }
-        echo $msg;
-        if ($exit) {
-            die();
-        }
-        return $msg;
-    }
-
-
-    /**
-     * Output a dump of a file
-     *
-     * @param mixed $file file which will be dumped
-     * @param bool  $echo
-     * @param bool  $exit
-     *
-     * @return string
-     */
-    public static function dumpFile($file, $echo = true, $exit = false)
-    {
-        $msg = highlight_file($file, true);
-        $msg = "<div style='padding: 5px; font-weight: bold'>{$msg}</div>";
-        if (!$echo) {
-            return $msg;
-        }
-        echo $msg;
-        if ($exit) {
-            die();
-        }
-        return $msg;
-    }
 
     /**
      * Support for recursive array diff
@@ -167,99 +83,6 @@ class Xmf_Utils
     }
 
     /**
-     * Gets an environment variable from available sources, and provides emulation
-     * for unsupported or inconsistent environment variables (i.e. DOCUMENT_ROOT on
-     * IIS, or SCRIPT_NAME in CGI mode).  Also exposes some additional custom
-     * environment information.
-     *
-     * @param  string $name Environment variable name.
-     * @param  mixed  $default
-     *
-     * @return string Environment variable setting.
-     * @link http: //book.cakephp.org/2.0/en/core-libraries/global-constants-and-functions.html#env
-     */
-    public static function getEnv($name, $default = null)
-    {
-        if ($name === 'HTTPS') {
-            if (isset($_SERVER['HTTPS'])) {
-                return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
-            }
-            return (strpos(self::getEnv('SCRIPT_URI'), 'https://') === 0);
-        }
-
-        if ($name === 'SCRIPT_NAME') {
-            if (self::getEnv('CGI_MODE') && isset($_ENV['SCRIPT_URL'])) {
-                $name = 'SCRIPT_URL';
-            }
-        }
-
-        $val = null;
-        if (isset($_SERVER[$name])) {
-            $val = $_SERVER[$name];
-        } elseif (isset($_ENV[$name])) {
-            $val = $_ENV[$name];
-        } elseif (getenv($name) !== false) {
-            $val = getenv($name);
-        }
-
-        if ($name === 'REMOTE_ADDR' && $val === self::getEnv('SERVER_ADDR')) {
-            $addr = self::getEnv('HTTP_PC_REMOTE_ADDR');
-            if ($addr !== null) {
-                $val = $addr;
-            }
-        }
-
-        if ($val !== null) {
-            return $val;
-        }
-
-        switch ($name) {
-            case 'SCRIPT_FILENAME':
-                if (defined('SERVER_IIS') && SERVER_IIS === true) {
-                    return str_replace('\\\\', '\\', self::getEnv('PATH_TRANSLATED'));
-                }
-                break;
-            case 'DOCUMENT_ROOT':
-                $name = self::getEnv('SCRIPT_NAME');
-                $filename = self::getEnv('SCRIPT_FILENAME');
-                $offset = 0;
-                if (!strpos($name, '.php')) {
-                    $offset = 4;
-                }
-                return substr($filename, 0, -(strlen($name) + $offset));
-                break;
-            case 'PHP_SELF':
-                return str_replace(self::getEnv('DOCUMENT_ROOT'), '', self::getEnv('SCRIPT_FILENAME'));
-                break;
-            case 'CGI_MODE':
-                return (PHP_SAPI === 'cgi');
-                break;
-            case 'HTTP_BASE':
-                $host = self::getEnv('HTTP_HOST');
-                $parts = explode('.', $host);
-                $count = count($parts);
-
-                if ($count === 1) {
-                    return '.' . $host;
-                } elseif ($count === 2) {
-                    return '.' . $host;
-                } elseif ($count === 3) {
-                    $gTLD = array(
-                            'aero', 'asia', 'biz', 'cat', 'com', 'coop', 'edu', 'gov', 'info', 'int', 'jobs', 'mil',
-                            'mobi', 'museum', 'name', 'net', 'org', 'pro', 'tel', 'travel', 'xxx'
-                    );
-                    if (in_array($parts[1], $gTLD)) {
-                        return '.' . $host;
-                    }
-                }
-                array_shift($parts);
-                return '.' . implode('.', $parts);
-                break;
-        }
-        return $default;
-    }
-
-    /**
      * @return array
      */
     public static function getCurrentUrls()
@@ -301,5 +124,108 @@ class Xmf_Utils
             $size = strlen($serialized);
         }
         return $size;
+    }
+
+    /**
+     * Check Xoops Version against a provided version
+     *
+     * @param int $x
+     * @param int $y
+     * @param int $z
+     * @param string $signal
+     * @return bool
+     */
+    public static function checkXoopsVersion($x, $y, $z, $signal = '==')
+     {
+         $xv = explode('-', str_replace('XOOPS ', '', XOOPS_VERSION));
+
+         list($a, $b, $c) = explode('.', $xv[0]);
+         $xv = $a*10000 + $b*100 + $c;
+         $mv = $x*10000 + $y*100 + $z;
+         if ($signal == '>') return $xv > $mv;
+         if ($signal == '>=') return $xv >= $mv;
+         if ($signal == '<') return $xv < $mv;
+         if ($signal == '<=') return $xv <= $mv;
+         if ($signal == '==') return $xv == $mv;
+
+         return false;
+     }
+     static public function purifyText($text, $keyword = false)
+    {
+        $myts = MyTextSanitizer::getInstance();
+        $text = str_replace('&nbsp;', ' ', $text);
+        $text = str_replace('<br />', ' ', $text);
+        $text = str_replace('<br/>', ' ', $text);
+        $text = str_replace('<br', ' ', $text);
+        $text = strip_tags($text);
+        $text = html_entity_decode($text);
+        $text = $myts->undoHtmlSpecialChars($text);
+        $text = str_replace(')', ' ', $text);
+        $text = str_replace('(', ' ', $text);
+        $text = str_replace(':', ' ', $text);
+        $text = str_replace('&euro', ' euro ', $text);
+        $text = str_replace('&hellip', '...', $text);
+        $text = str_replace('&rsquo', ' ', $text);
+        $text = str_replace('!', ' ', $text);
+        $text = str_replace('?', ' ', $text);
+        $text = str_replace('"', ' ', $text);
+        $text = str_replace('-', ' ', $text);
+        $text = str_replace('\n', ' ', $text);
+        $text = str_replace('&#8213;', ' ', $text);
+
+        if ($keyword) {
+            $text = str_replace('.', ' ', $text);
+            $text = str_replace(',', ' ', $text);
+            $text = str_replace('\'', ' ', $text);
+        }
+        $text = str_replace(';', ' ', $text);
+
+        return $text;
+    }
+
+    static public function html2text($document)
+    {
+        // PHP Manual:: function preg_replace
+        // $document should contain an HTML document.
+        // This will remove HTML tags, javascript sections
+        // and white space. It will also convert some
+        // common HTML entities to their text equivalent.
+        // Credits : newbb2
+        $search = array(
+                "'<script[^>]*?>.*?</script>'si", // Strip out javascript
+                "'<img.*?/>'si", // Strip out img tags
+                "'<[\/\!]*?[^<>]*?>'si", // Strip out HTML tags
+                "'([\r\n])[\s]+'", // Strip out white space
+                "'&(quot|#34);'i", // Replace HTML entities
+                "'&(amp|#38);'i",
+                "'&(lt|#60);'i",
+                "'&(gt|#62);'i",
+                "'&(nbsp|#160);'i",
+                "'&(iexcl|#161);'i",
+                "'&(cent|#162);'i",
+                "'&(pound|#163);'i",
+                "'&(copy|#169);'i",
+                "'&#(\d+);'e"
+        ); // evaluate as php
+
+        $replace = array(
+                "",
+                "",
+                "",
+                "\\1",
+                "\"",
+                "&",
+                "<",
+                ">",
+                " ",
+                chr(161),
+                chr(162),
+                chr(163),
+                chr(169),
+                "chr(\\1)"
+        );
+
+        $text = preg_replace($search, $replace, $document);
+        return $text;
     }
 }
