@@ -3054,7 +3054,7 @@ class Xmf_Uploader
         $this->file_max_size = $this->getsize($this->file_max_size);
         $this->jpeg_size = $this->getsize($this->jpeg_size);
         // some parameters are being deprecated, and replaced with others
-        if (is_null($this->image_overlay_opacity)) {
+        if (null === $this->image_overlay_opacity) {
             $this->image_overlay_opacity = $this->image_overlay_percent;
         }
         if ($this->image_text_opacity == 100) {
@@ -3075,7 +3075,7 @@ class Xmf_Uploader
         }
 
         if ($this->processed) {
-            if (empty($server_path) || is_null($server_path)) {
+            if (empty($server_path) || null === $server_path) {
                 $this->log .= '<strong>process file and return the content</strong><br />';
                 $return_mode = true;
             } else {
@@ -3180,35 +3180,35 @@ class Xmf_Uploader
             if ($this->file_is_image) {
                 if (is_numeric($this->image_src_x) && is_numeric($this->image_src_y)) {
                     $ratio = $this->image_src_x / $this->image_src_y;
-                    if (!is_null($this->image_max_width) && $this->image_src_x > $this->image_max_width) {
+                    if (null !== $this->image_max_width && $this->image_src_x > $this->image_max_width) {
                         $this->processed = false;
                         $this->error = $this->translate('image_too_wide');
                     }
-                    if (!is_null($this->image_min_width) && $this->image_src_x < $this->image_min_width) {
+                    if (null !== $this->image_min_width && $this->image_src_x < $this->image_min_width) {
                         $this->processed = false;
                         $this->error = $this->translate('image_too_narrow');
                     }
-                    if (!is_null($this->image_max_height) && $this->image_src_y > $this->image_max_height) {
+                    if (null !== $this->image_max_height && $this->image_src_y > $this->image_max_height) {
                         $this->processed = false;
                         $this->error = $this->translate('image_too_high');
                     }
-                    if (!is_null($this->image_min_height) && $this->image_src_y < $this->image_min_height) {
+                    if (null !== $this->image_min_height && $this->image_src_y < $this->image_min_height) {
                         $this->processed = false;
                         $this->error = $this->translate('image_too_short');
                     }
-                    if (!is_null($this->image_max_ratio) && $ratio > $this->image_max_ratio) {
+                    if (null !== $this->image_max_ratio && $ratio > $this->image_max_ratio) {
                         $this->processed = false;
                         $this->error = $this->translate('ratio_too_high');
                     }
-                    if (!is_null($this->image_min_ratio) && $ratio < $this->image_min_ratio) {
+                    if (null !== $this->image_min_ratio && $ratio < $this->image_min_ratio) {
                         $this->processed = false;
                         $this->error = $this->translate('ratio_too_low');
                     }
-                    if (!is_null($this->image_max_pixels) && $this->image_src_pixels > $this->image_max_pixels) {
+                    if (null !== $this->image_max_pixels && $this->image_src_pixels > $this->image_max_pixels) {
                         $this->processed = false;
                         $this->error = $this->translate('too_many_pixels');
                     }
-                    if (!is_null($this->image_min_pixels) && $this->image_src_pixels < $this->image_min_pixels) {
+                    if (null !== $this->image_min_pixels && $this->image_src_pixels < $this->image_min_pixels) {
                         $this->processed = false;
                         $this->error = $this->translate('not_enough_pixels');
                     }
@@ -3236,19 +3236,19 @@ class Xmf_Uploader
                 }
                 $this->log .= '- new file name ext : ' . $this->image_convert . '<br />';
             }
-            if (!is_null($this->file_new_name_body)) { // rename file body
+            if (null !== $this->file_new_name_body) { // rename file body
                 $this->file_dst_name_body = $this->file_new_name_body;
                 $this->log .= '- new file name body : ' . $this->file_new_name_body . '<br />';
             }
-            if (!is_null($this->file_new_name_ext)) { // rename file ext
+            if (null !== $this->file_new_name_ext) { // rename file ext
                 $this->file_dst_name_ext = $this->file_new_name_ext;
                 $this->log .= '- new file name ext : ' . $this->file_new_name_ext . '<br />';
             }
-            if (!is_null($this->file_name_body_add)) { // append a string to the name
+            if (null !== $this->file_name_body_add) { // append a string to the name
                 $this->file_dst_name_body = $this->file_dst_name_body . $this->file_name_body_add;
                 $this->log .= '- file name body append : ' . $this->file_name_body_add . '<br />';
             }
-            if (!is_null($this->file_name_body_pre)) { // prepend a string to the name
+            if (null !== $this->file_name_body_pre) { // prepend a string to the name
                 $this->file_dst_name_body = $this->file_name_body_pre . $this->file_dst_name_body;
                 $this->log .= '- file name body prepend : ' . $this->file_name_body_pre . '<br />';
             }
@@ -3279,7 +3279,7 @@ class Xmf_Uploader
             }
 
             $this->log .= '- destination variables<br />';
-            if (empty($this->file_dst_path) || is_null($this->file_dst_path)) {
+            if (empty($this->file_dst_path) || null === $this->file_dst_path) {
                 $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;file_dst_path         : n/a<br />';
             } else {
                 $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;file_dst_path         : ' . $this->file_dst_path . '<br />';
@@ -3725,7 +3725,7 @@ class Xmf_Uploader
                                         $this->log .=
                                                 '&nbsp;&nbsp;&nbsp;&nbsp;ratio_crop_x         : ' . $ratio_crop['x'] .
                                                 ' (' . $ratio_crop['l'] . ';' . $ratio_crop['r'] . ')<br />';
-                                        if (is_null($this->image_crop)) {
+                                        if (null === $this->image_crop) {
                                             $this->image_crop = array(0, 0, 0, 0);
                                         }
                                     } else {
@@ -3749,7 +3749,7 @@ class Xmf_Uploader
                                         $this->log .=
                                                 '&nbsp;&nbsp;&nbsp;&nbsp;ratio_crop_y         : ' . $ratio_crop['y'] .
                                                 ' (' . $ratio_crop['t'] . ';' . $ratio_crop['b'] . ')<br />';
-                                        if (is_null($this->image_crop)) {
+                                        if (null === $this->image_crop) {
                                             $this->image_crop = array(0, 0, 0, 0);
                                         }
                                     }
@@ -3782,7 +3782,7 @@ class Xmf_Uploader
                                             $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;ratio_fill_x         : ' .
                                                           $ratio_crop['x'] . ' (' . $ratio_crop['l'] . ';' .
                                                           $ratio_crop['r'] . ')<br />';
-                                            if (is_null($this->image_crop)) {
+                                            if (null === $this->image_crop) {
                                                 $this->image_crop = array(0, 0, 0, 0);
                                             }
                                         } else {
@@ -3806,7 +3806,7 @@ class Xmf_Uploader
                                             $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;ratio_fill_y         : ' .
                                                           $ratio_crop['y'] . ' (' . $ratio_crop['t'] . ';' .
                                                           $ratio_crop['b'] . ')<br />';
-                                            if (is_null($this->image_crop)) {
+                                            if (null === $this->image_crop) {
                                                 $this->image_crop = array(0, 0, 0, 0);
                                             }
                                         }
@@ -3860,10 +3860,10 @@ class Xmf_Uploader
                     }
 
                     // crop image (and also crops if image_ratio_crop is used)
-                    if ((!empty($this->image_crop) || !is_null($ratio_crop))) {
+                    if ((!empty($this->image_crop) || null !== $ratio_crop)) {
                         list($ct, $cr, $cb, $cl) = $this->getoffsets($this->image_crop, $this->image_dst_x, $this->image_dst_y, true, true);
                         // we adjust the cropping if we use image_ratio_crop
-                        if (!is_null($ratio_crop)) {
+                        if (null !== $ratio_crop) {
                             if (array_key_exists('t', $ratio_crop))
                                 $ct += $ratio_crop['t'];
                             if (array_key_exists('r', $ratio_crop))

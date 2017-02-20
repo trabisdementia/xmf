@@ -967,13 +967,13 @@ class Xmf_Request
         } else {
             if ($mask & 4) {
                 // If the allow html flag is set, apply a safe html filter to the variable
-                if (is_null($safeHtmlFilter)) {
+                if (null === $safeHtmlFilter) {
                     $safeHtmlFilter = Xmf_Filter_Input::getInstance(null, null, 1, 1);
                 }
                 $var = $safeHtmlFilter->clean($var, $type);
             } else {
                 // Since no allow flags were set, we will apply the most strict filter to the variable
-                if (is_null($noHtmlFilter)) {
+                if (null === $noHtmlFilter) {
                     $noHtmlFilter = Xmf_Filter_Input::getInstance( /* $tags, $attr, $tag_method, $attr_method, $xss_auto */);
                 }
                 $var = $noHtmlFilter->clean($var, $type);

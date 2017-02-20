@@ -143,7 +143,7 @@ class Xmf extends xos_kernel_Xoops2
      */
     public function setOption($key, $value = null)
     {
-        if (!is_null($value)) {
+        if (null !== $value) {
             $this->_options[$key] = $value;
         }
     }
@@ -594,7 +594,7 @@ class Xmf extends xos_kernel_Xoops2
      */
     public function setModuleConfig($key, $value = null, $dirname = 'system')
     {
-        if (!is_null($value)) {
+        if (null !== $value) {
             $dirname = trim(strtolower($dirname));
             if (empty($dirname)) {
                 $dirname = $this->isModule() ? $this->module()->getVar('dirname') : 'system';
