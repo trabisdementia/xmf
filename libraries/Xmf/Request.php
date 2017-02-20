@@ -218,7 +218,7 @@ class Xmf_Request
      */
     public static function getHost()
     {
-        return self::getEnv('HTTP_HOST') ? self::getEnv('HTTP_HOST') : 'localhost';
+        return self::getEnv('HTTP_HOST') ?: 'localhost';
     }
 
     /**
@@ -242,7 +242,7 @@ class Xmf_Request
      */
     public static function getReferer()
     {
-        return self::getEnv('HTTP_REFERER') ? self::getEnv('HTTP_REFERER') : '';
+        return self::getEnv('HTTP_REFERER') ?: '';
     }
 
     /**
@@ -250,7 +250,7 @@ class Xmf_Request
      */
     public static function getScriptName()
     {
-        return self::getEnv('SCRIPT_NAME') ? self::getEnv('SCRIPT_NAME') : (self::getEnv('ORIG_SCRIPT_NAME') ? self::getEnv('ORIG_SCRIPT_NAME') : '');
+        return self::getEnv('SCRIPT_NAME') ?: (self::getEnv('ORIG_SCRIPT_NAME') ?: '');
     }
 
     /**

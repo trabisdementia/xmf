@@ -189,7 +189,7 @@ class Xmf_Object_Controller
                 redirect_header($smart_previous_page, 3, _OBJ_XMF_SAVE_ERROR . $smartObj->getHtmlErrors());
             }
 
-            $redirect_page = $redirect_page ? $redirect_page : smart_get_page_before_form();
+            $redirect_page = $redirect_page ?: smart_get_page_before_form();
 
             redirect_header($redirect_page, 2, $redirect_msg);
         }

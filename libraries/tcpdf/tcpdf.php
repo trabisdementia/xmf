@@ -5793,7 +5793,7 @@ class TCPDF {
 					// get string width without spaces
 					$width = $this->GetStringWidth(str_replace(' ', '', $txt));
 					// calculate average space width
-					$spacewidth = -1000 * ($w - $width - $this->cell_padding['L'] - $this->cell_padding['R']) / ($ns?$ns:1) / $this->FontSize;
+					$spacewidth = -1000 * ($w - $width - $this->cell_padding['L'] - $this->cell_padding['R']) / ($ns?:1) / $this->FontSize;
 					if ($this->font_stretching != 100) {
 						// word spacing is affected by stretching
 						$spacewidth /= ($this->font_stretching / 100);
@@ -5805,7 +5805,7 @@ class TCPDF {
 					// get string width
 					$width = $txwidth;
 					// new space width
-					$spacewidth = (($w - $width - $this->cell_padding['L'] - $this->cell_padding['R']) / ($ns?$ns:1)) * $this->k;
+					$spacewidth = (($w - $width - $this->cell_padding['L'] - $this->cell_padding['R']) / ($ns?:1)) * $this->k;
 					if ($this->font_stretching != 100) {
 						// word spacing (Tw) is affected by stretching
 						$spacewidth /= ($this->font_stretching / 100);
@@ -5860,7 +5860,7 @@ class TCPDF {
 				// print overlapping characters as separate string
 				$xshift = 0; // horizontal shift
 				$ty = (($this->h - $basefonty + (0.2 * $this->FontSize)) * $k);
-				$spw = (($w - $txwidth - $this->cell_padding['L'] - $this->cell_padding['R']) / ($ns?$ns:1));
+				$spw = (($w - $txwidth - $this->cell_padding['L'] - $this->cell_padding['R']) / ($ns?:1));
 				foreach ($uniblock as $uk => $uniarr) {
 					if (($uk % 2) == 0) {
 						// x space to skip
