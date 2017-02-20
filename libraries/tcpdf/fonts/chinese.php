@@ -11,5 +11,5 @@ $diff='';
 $originalsize=5172084;
 $enc='UniGB-UTF16-H';
 $cidinfo=array('Registry'=>'Adobe', 'Ordering'=>'GB1','Supplement'=>2);
-include(__DIR__ . '/uni2cid_ag15.php');
+include __DIR__ . '/uni2cid_ag15.php';
 // --- EOF ---

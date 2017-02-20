@@ -472,7 +472,7 @@ class Xmf_Object_Form extends XoopsThemeForm
                     $classname = ucfirst($moduleName) . ucfirst($controlName) . "FormElement";
 
                     if (file_exists($moduleFormElementsPath . $classFileName)) {
-                        include_once($moduleFormElementsPath . $classFileName);
+                        include_once $moduleFormElementsPath . $classFileName;
                     } else {
                         trigger_error($classname . " Not found", E_USER_WARNING);
                         return new XoopsFormLabel(); //Empty object
@@ -539,7 +539,7 @@ class Xmf_Object_Form extends XoopsThemeForm
         $xoopseditorclass = XOOPS_ROOT_PATH . '/class/xoopsform/formeditor.php';
 
         if (file_exists($xoopseditorclass)) {
-            include_once($xoopseditorclass);
+            include_once $xoopseditorclass;
             $editor = new XoopsFormEditor($caption, $form_editor, $editor_configs, $nohtml = false, $onfailure = "textarea");
         } else {
 
@@ -548,7 +548,7 @@ class Xmf_Object_Form extends XoopsThemeForm
                 case 'tiny' :
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . "/class/xoopseditor/tinyeditor/formtinytextarea.php")) {
-                            include_once(XOOPS_ROOT_PATH . "/class/xoopseditor/tinyeditor/formtinytextarea.php");
+                            include_once XOOPS_ROOT_PATH . "/class/xoopseditor/tinyeditor/formtinytextarea.php";
                             $editor = new XoopsFormTinyTextArea(array(
                                     'caption' => $caption,
                                     'name'    => $name,
@@ -579,7 +579,7 @@ class Xmf_Object_Form extends XoopsThemeForm
                 case 'fckeditor' :
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . "/class/xoopseditor/fckeditor/formfckeditor.php")) {
-                            include_once(XOOPS_ROOT_PATH . "/class/xoopseditor/fckeditor/formfckeditor.php");
+                            include_once XOOPS_ROOT_PATH . "/class/xoopseditor/fckeditor/formfckeditor.php";
                             $editor = new XoopsFormFckeditor(array(
                                     'caption' => $caption,
                                     'name'    => $name,
@@ -602,7 +602,7 @@ class Xmf_Object_Form extends XoopsThemeForm
                 case 'inbetween' :
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . "/class/xoopseditor/inbetween/forminbetweentextarea.php")) {
-                            include_once(XOOPS_ROOT_PATH . "/class/xoopseditor/inbetween/forminbetweentextarea.php");
+                            include_once XOOPS_ROOT_PATH . "/class/xoopseditor/inbetween/forminbetweentextarea.php";
                             $editor = new XoopsFormInbetweenTextArea(array(
                                     'caption' => $caption,
                                     'name'    => $name,
@@ -625,7 +625,7 @@ class Xmf_Object_Form extends XoopsThemeForm
                 case 'koivi' :
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . "/class/wysiwyg/formwysiwygtextarea.php")) {
-                            include_once(XOOPS_ROOT_PATH . "/class/wysiwyg/formwysiwygtextarea.php");
+                            include_once XOOPS_ROOT_PATH . "/class/wysiwyg/formwysiwygtextarea.php";
                             $editor = new XoopsFormWysiwygTextArea($caption, $name, $value, '100%', '400px');
                         } else {
                             if ($dhtml) {
@@ -642,7 +642,7 @@ class Xmf_Object_Form extends XoopsThemeForm
                 case "spaw":
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . "/class/spaw/formspaw.php")) {
-                            include_once(XOOPS_ROOT_PATH . "/class/spaw/formspaw.php");
+                            include_once XOOPS_ROOT_PATH . "/class/spaw/formspaw.php";
                             $editor = new XoopsFormSpaw($caption, $name, $value);
                         }
                     } else {
@@ -653,7 +653,7 @@ class Xmf_Object_Form extends XoopsThemeForm
                 case "htmlarea":
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . "/class/htmlarea/formhtmlarea.php")) {
-                            include_once(XOOPS_ROOT_PATH . "/class/htmlarea/formhtmlarea.php");
+                            include_once XOOPS_ROOT_PATH . "/class/htmlarea/formhtmlarea.php";
                             $editor = new XoopsFormHtmlarea($caption, $name, $value);
                         }
                     } else {

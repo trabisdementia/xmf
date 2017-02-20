@@ -635,7 +635,7 @@ class TCPDFBarcode {
 		}
 		$sum *= 3;
 		for ($i = 1; $i < $len; $i+=2) {
-			$sum += ($code{$i});
+			$sum += $code{$i};
 		}
 		$r = $sum % 10;
 		if($r > 0) {
