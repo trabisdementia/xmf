@@ -136,7 +136,7 @@ abstract class Xmf_Module_Helper_Abstract
     {
         $name = strtolower($name);
         $result = $this->xmf()->getModuleConfig($name, $this->_dirname);
-        if (is_null($result)) {
+        if (null === $result) {
             $this->addLog("ERROR :: Config '{$name}' does not exist");
             return $result;
         }

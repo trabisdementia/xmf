@@ -58,7 +58,7 @@ class Xmf_Template_Print extends Xmf_Template_Abstract
 
     protected function render()
     {
-        $this->tpl->assign('xmf_print_pageTitle', $this->_pagetitle ? $this->_pagetitle : $this->_title);
+        $this->tpl->assign('xmf_print_pageTitle', $this->_pagetitle ?: $this->_title);
         $this->tpl->assign('xmf_print_title', $this->_title);
         $this->tpl->assign('xmf_print_description', $this->_description);
         $this->tpl->assign('xmf_print_content', $this->_content);

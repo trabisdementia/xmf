@@ -48,7 +48,7 @@ class Xmf_Template_Addto extends Xmf_Template_Abstract
      */
     public function setLayout($value)
     {
-        $layout = intval($value);
+        $layout = (int)$value;
         if ($layout < 0 || $layout > 3) {
             $layout = 0;
         }
@@ -62,7 +62,7 @@ class Xmf_Template_Addto extends Xmf_Template_Abstract
      */
     public function setMethod($value)
     {
-        $method = intval($value);
+        $method = (int)$value;
         if ($method < 0 || $method > 1) {
             $method = 1;
         }

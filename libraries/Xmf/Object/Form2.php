@@ -49,7 +49,7 @@ class Xmf_Object_Form2 extends XoopsSimpleForm
     /**
      * @return string
      */
-    public function getAction()
+    public function getAction($encode = true)
     {
         return $this->action;
     }
@@ -113,7 +113,7 @@ class Xmf_Object_Form2 extends XoopsSimpleForm
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle($encode = false)
     {
         return $this->title;
     }

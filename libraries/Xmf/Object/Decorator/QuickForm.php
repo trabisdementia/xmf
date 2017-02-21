@@ -195,7 +195,7 @@ class Xmf_Object_Decorator_QuickForm extends Xmf_Object_Decorator_Abstract
     public function addText($key)
     {
         $this->_key = $key;
-        $maxLength = $this->_object->vars[$this->_key]['maxlength']? $this->_object->vars[$this->_key]['maxlength'] :255;
+        $maxLength = $this->_object->vars[$this->_key]['maxlength']?:255;
         $size = $maxLength < 50 ? $maxLength : 50;
         $this->_add(new XoopsFormText('', $key, $size, $maxLength, $this->_getValue()));
     }

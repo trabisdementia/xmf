@@ -43,7 +43,7 @@
  */
 
 // include class for decoding filters
-require_once(dirname(__FILE__).'/tcpdf_filters.php');
+require_once(__DIR__ . '/tcpdf_filters.php');
 
 /**
  * @class TCPDF_PARSER
@@ -147,11 +147,11 @@ class TCPDF_PARSER {
 			$offset = (strlen($matches[0][0]) + $matches[0][1]);
 			if ($matches[3][0] == 'n') {
 				// create unique object index: [object number]_[generation number]
-				$index = $obj_num.'_'.intval($matches[2][0]);
+				$index = $obj_num.'_' . (int)$matches[2][0];
 				// check if object already exist
 				if (!isset($xref['xref'][$index])) {
 					// store object offset position
-					$xref['xref'][$index] = intval($matches[1][0]);
+					$xref['xref'][$index] = (int)$matches[1][0];
 				}
 				++$obj_num;
 				$offset += 2;
@@ -160,7 +160,7 @@ class TCPDF_PARSER {
 				$offset += 2;
 			} else {
 				// object number (index)
-				$obj_num = intval($matches[1][0]);
+				$obj_num = (int)$matches[1][0];
 			}
 		}
 		// get trailer data
@@ -171,16 +171,16 @@ class TCPDF_PARSER {
 				$xref['trailer'] = array();
 				// parse trailer_data
 				if (preg_match('/Size[\s]+([0-9]+)/i', $trailer_data, $matches) > 0) {
-					$xref['trailer']['size'] = intval($matches[1]);
+					$xref['trailer']['size'] = (int)$matches[1];
 				}
 				if (preg_match('/Root[\s]+([0-9]+)[\s]+([0-9]+)[\s]+R/i', $trailer_data, $matches) > 0) {
-					$xref['trailer']['root'] = intval($matches[1]).'_'.intval($matches[2]);
+					$xref['trailer']['root'] = (int)$matches[1] . '_' . (int)$matches[2];
 				}
 				if (preg_match('/Encrypt[\s]+([0-9]+)[\s]+([0-9]+)[\s]+R/i', $trailer_data, $matches) > 0) {
-					$xref['trailer']['encrypt'] = intval($matches[1]).'_'.intval($matches[2]);
+					$xref['trailer']['encrypt'] = (int)$matches[1] . '_' . (int)$matches[2];
 				}
 				if (preg_match('/Info[\s]+([0-9]+)[\s]+([0-9]+)[\s]+R/i', $trailer_data, $matches) > 0) {
-					$xref['trailer']['info'] = intval($matches[1]).'_'.intval($matches[2]);
+					$xref['trailer']['info'] = (int)$matches[1] . '_' . (int)$matches[2];
 				}
 				if (preg_match('/ID[\s]*[\[][\s]*[<]([^>]*)[>][\s]*[<]([^>]*)[>]/i', $trailer_data, $matches) > 0) {
 					$xref['trailer']['id'] = array();
@@ -190,7 +190,7 @@ class TCPDF_PARSER {
 			}
 			if (preg_match('/Prev[\s]+([0-9]+)/i', $trailer_data, $matches) > 0) {
 				// get previous xref
-				$xref = getXrefData(substr($this->pdfdata, 0, $startxref), intval($matches[1]), $xref);
+				$xref = getXrefData(substr($this->pdfdata, 0, $startxref), (int)$matches[1], $xref);
 			}
 		} else {
 			$this->Error('Unable to find trailer');
@@ -352,11 +352,11 @@ class TCPDF_PARSER {
 					// indirect object reference
 					$objtype = 'ojbref';
 					$offset += strlen($matches[0]);
-					$objval = intval($matches[1]).'_'.intval($matches[2]);
+					$objval = (int)$matches[1] . '_' . (int)$matches[2];
 				} elseif (preg_match('/^([0-9]+)[\s]+([0-9]+)[\s]+obj/iU', substr($this->pdfdata, $offset, 33), $matches) == 1) {
 					// object start
 					$objtype = 'ojb';
-					$objval = intval($matches[1]).'_'.intval($matches[2]);
+					$objval = (int)$matches[1] . '_' . (int)$matches[2];
 					$offset += strlen ($matches[0]);
 				} elseif (($numlen = strspn($this->pdfdata, '+-.0123456789', $offset)) > 0) {
 					// numeric object
@@ -450,7 +450,7 @@ class TCPDF_PARSER {
 			if ($v[0] == '/') {
 				if (($v[1] == 'Length') AND (isset($sdic[($k + 1)])) AND ($sdic[($k + 1)][0] == 'numeric')) {
 					// get declared stream lenght
-					$declength = intval($sdic[($k + 1)][1]);
+					$declength = (int)$sdic[($k + 1)][1];
 					if ($declength < $slength) {
 						$stream = substr($stream, 0, $declength);
 						$slength = $declength;

@@ -81,5 +81,3 @@
     $translation['no_conversion_type']          = 'Belirtilen dosya türü dönüþtürülemedi.';
     $translation['copy_failed']                 = 'Dosya kopyalanýrken hata oluþtu. copy() iþlemi baþarýsýz.';
     $translation['reading_failed']              = 'Dosya okunurken hata oluþtu.';   
-        
-?>

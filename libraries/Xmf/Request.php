@@ -218,7 +218,7 @@ class Xmf_Request
      */
     public static function getHost()
     {
-        return self::getEnv('HTTP_HOST') ? self::getEnv('HTTP_HOST') : 'localhost';
+        return self::getEnv('HTTP_HOST') ?: 'localhost';
     }
 
     /**
@@ -242,7 +242,7 @@ class Xmf_Request
      */
     public static function getReferer()
     {
-        return self::getEnv('HTTP_REFERER') ? self::getEnv('HTTP_REFERER') : '';
+        return self::getEnv('HTTP_REFERER') ?: '';
     }
 
     /**
@@ -250,7 +250,7 @@ class Xmf_Request
      */
     public static function getScriptName()
     {
-        return self::getEnv('SCRIPT_NAME') ? self::getEnv('SCRIPT_NAME') : (self::getEnv('ORIG_SCRIPT_NAME') ? self::getEnv('ORIG_SCRIPT_NAME') : '');
+        return self::getEnv('SCRIPT_NAME') ?: (self::getEnv('ORIG_SCRIPT_NAME') ?: '');
     }
 
     /**
@@ -967,13 +967,13 @@ class Xmf_Request
         } else {
             if ($mask & 4) {
                 // If the allow html flag is set, apply a safe html filter to the variable
-                if (is_null($safeHtmlFilter)) {
+                if (null === $safeHtmlFilter) {
                     $safeHtmlFilter = Xmf_Filter_Input::getInstance(null, null, 1, 1);
                 }
                 $var = $safeHtmlFilter->clean($var, $type);
             } else {
                 // Since no allow flags were set, we will apply the most strict filter to the variable
-                if (is_null($noHtmlFilter)) {
+                if (null === $noHtmlFilter) {
                     $noHtmlFilter = Xmf_Filter_Input::getInstance( /* $tags, $attr, $tag_method, $attr_method, $xss_auto */);
                 }
                 $var = $noHtmlFilter->clean($var, $type);
